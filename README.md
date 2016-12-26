@@ -1,4 +1,4 @@
-# bpp 
+# BPP - branch point prediction 
 BPP is a method that can identify branch point based on only the intron sequence.  
 
 ### How BPP works?
