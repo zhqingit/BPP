@@ -27,7 +27,7 @@ Usage: BP_PPT.py -b -p -i -r -h
 #### Example:
 - BP_PPT.py -b demo/pwmBP_human.txt -p demo/scPPT_human.txt -i demo/example.fa 
 
-### Format of the output file:
+#### Format of the output file:
 - `id:      ID of the intron`
 - `bps:     the branch point sequence`
 - `bp_pos:  the position of the branch point relative to 3'SS upstream`
