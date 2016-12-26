@@ -24,3 +24,16 @@ Usage: BP_PPT.py -b -p -i -r -h
 - `-r, --report nu   INT     The reported sites; default=1; 0: print all positions`
 - `-h, --help`
 
+#### Example:
+- BP_PPT.py -b demo/pwmBP_human.txt -p demo/scPPT_human.txt -i demo/example.fa 
+
+### Format of the output file:
+- `id:      ID of the intron`
+- `bps:     the branch point sequence`
+- `bp_pos:  the position of the branch point relative to 3'SS upstream`
+- `sc_bps:  the score of the BPS`
+- `sc_ppt:  the score of the PPT`
+- `sc:      the score of the BPS and PPT`
+- `zsc_bps: the z-score of the BPS`
+- `zsc_ppt: the z-score of the PPT`
+- `zsc:     the z-score of the BPS and PPT`
