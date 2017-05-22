@@ -21,7 +21,7 @@ def bppt_get_pwm(pwmf): # get the pwm of BPS information
             PWMBP[index]['G'] = float(line[3])
             PWMBP[index]['T'] = float(line[4])
             index += 1
-    IN.close()
+    #IN.close()
     return(PWMBP)
 
 def bppt_get_ppt(pptf): # get the ppt score
@@ -33,7 +33,7 @@ def bppt_get_ppt(pptf): # get the ppt score
                 continue
             line = tmp.split('\t')
             PPTS[line[0]] = float(line[4])
-    IN.close()
+    #IN.close()
     return(PPTS)
 
 def bppt_bpscore(cbps):
