@@ -152,6 +152,12 @@ def bppt_get_BPPTsc(seq,maxL,baseppt): # get the candidate bps and ppt and their
         totpptsc += pptSC
         npos += 1
 
+    # When seq is too short, such as "TC", npos is 0 now. 
+    # An Error will raise: "integer division or modulo by zero"
+    # Return a non-sense result to avoid advance abortion.
+    if npos == 0:
+        return ("NNNNNN","NA","NA","NA")
+
     msc = totsc/npos
     mbpsc = totbpsc/npos
     mpptsc = totpptsc/npos
