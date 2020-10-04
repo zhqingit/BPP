@@ -118,13 +118,26 @@ def bppt_get_BPPTsc(seq,maxL,baseppt): # get the candidate bps and ppt and their
     #for ipos in range(pstart,sL-14-lmotif): # the BPS could close to the 3' end with only one nucleotide distance 
         pAG = sL - ipos - 5
         bpS = seq[ipos:ipos+lmotif] # bps sequence
-        bpSC = cBPSC[bpS] # bps sequence score
+        # "NNNNNN" will cause KEYERROR
+        try: 
+            bpSC = cBPSC[bpS] # bps sequence score
+        except:
+            return ("NNNNNN","NA","NA","NA")
 
         pptSC = 0
         dis3 = pAG - 1 # the distance of BPS last nucleotide to the 3' end
         if dis3 > lppt + 3: # 3 means the AG + one nucleotide distance, no U2AF can bind the downstream sequence of BPS if this is true
             pptS = seq[ipos+lmotif:sL-3] # bps sequence
-            pptSC = bppt_get_pptsc(pptS,lppt,l_max_ppt,baseppt)
+            # Fix Error:
+            #   ...
+            #   File "./BP_PPT.py", line 87, in bppt_get_pptsc
+            #pptSC += PPTS[cppts]
+            #KeyError: 'AATGGTCN'
+            try:
+                pptSC = bppt_get_pptsc(pptS,lppt,l_max_ppt,baseppt)
+            except:
+                return ("NNNNNN","NA","NA","NA")
+        
         
         #SC = bpSC + pptSC
         #SC = (bpSC + pptSC)*bppt_dis_pro(pAG) 
@@ -151,6 +164,12 @@ def bppt_get_BPPTsc(seq,maxL,baseppt): # get the candidate bps and ppt and their
         totbpsc += bpSC
         totpptsc += pptSC
         npos += 1
+
+    # When seq is too short, such as "TC", npos is 0 now. 
+    # An Error will raise: "integer division or modulo by zero"
+    # Return a non-sense result to avoid advance abortion.
+    if npos == 0:
+        return ("NNNNNN","NA","NA","NA")
 
     msc = totsc/npos
     mbpsc = totbpsc/npos
@@ -182,6 +201,8 @@ def bppt_get_BPPTsc(seq,maxL,baseppt): # get the candidate bps and ppt and their
     zsc = []
     zbps = []
     zppt = []
+    if sdsc == 0:
+        return ("NNNNNN","NA","NA","NA")
     for i in range(0,len(dsc)):
         zsc.append(dsc[i]/sdsc)
         zbps.append(dbpsc[i]/sdbpsc)
