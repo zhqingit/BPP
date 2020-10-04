@@ -192,6 +192,8 @@ def bppt_get_BPPTsc(seq,maxL,baseppt): # get the candidate bps and ppt and their
     zsc = []
     zbps = []
     zppt = []
+    if sdsc == 0:
+        return ("NNNNNN","NA","NA","NA")
     for i in range(0,len(dsc)):
         zsc.append(dsc[i]/sdsc)
         zbps.append(dbpsc[i]/sdbpsc)
