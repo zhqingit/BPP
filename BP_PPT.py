@@ -118,7 +118,11 @@ def bppt_get_BPPTsc(seq,maxL,baseppt): # get the candidate bps and ppt and their
     #for ipos in range(pstart,sL-14-lmotif): # the BPS could close to the 3' end with only one nucleotide distance 
         pAG = sL - ipos - 5
         bpS = seq[ipos:ipos+lmotif] # bps sequence
-        bpSC = cBPSC[bpS] # bps sequence score
+        # "NNNNNN" will cause KEYERROR
+        try: 
+            bpSC = cBPSC[bpS] # bps sequence score
+        except:
+            return ("NNNNNN","NA","NA","NA")
 
         pptSC = 0
         dis3 = pAG - 1 # the distance of BPS last nucleotide to the 3' end
