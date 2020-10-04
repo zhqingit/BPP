@@ -128,7 +128,16 @@ def bppt_get_BPPTsc(seq,maxL,baseppt): # get the candidate bps and ppt and their
         dis3 = pAG - 1 # the distance of BPS last nucleotide to the 3' end
         if dis3 > lppt + 3: # 3 means the AG + one nucleotide distance, no U2AF can bind the downstream sequence of BPS if this is true
             pptS = seq[ipos+lmotif:sL-3] # bps sequence
-            pptSC = bppt_get_pptsc(pptS,lppt,l_max_ppt,baseppt)
+            # Fix Error:
+            #   ...
+            #   File "./BP_PPT.py", line 87, in bppt_get_pptsc
+            #pptSC += PPTS[cppts]
+            #KeyError: 'AATGGTCN'
+            try:
+                pptSC = bppt_get_pptsc(pptS,lppt,l_max_ppt,baseppt)
+            except:
+                return ("NNNNNN","NA","NA","NA")
+        
         
         #SC = bpSC + pptSC
         #SC = (bpSC + pptSC)*bppt_dis_pro(pAG) 
