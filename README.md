@@ -1,3 +1,5 @@
+Updated to work with python3.9+ and output a file of the user's choosing
+
 # BPP - branch point prediction 
 BPP is a method that can identify branch point based on only the intron sequence.  
 
@@ -18,14 +20,23 @@ A paper describing BPP is under review.
 
 Usage: BP_PPT.py -b -p -i -r -h
 #### Required:
-- `-b, --pwm file    STR     The file including PWM of BPS`
-- `-p, --ppt file    STR     The file including the PPT score`
-- `-i, --FASTA file  STR     The file including the fasta sequence`
-- `-r, --report nu   INT     The reported sites; default=1; 0: print all positions`
-- `-h, --help`
+```bash
+-b, --pwm file    STR     The file including PWM of BPS
+-p, --ppt file    STR     The file including the PPT score
+-i, --FASTA file  STR     The file including the fasta sequence
+-r, --report nu   INT     The reported sites; default=1; 0: print all positions
+-o, --output      STR     Output file to write the results
+-h, --help
+```
 
 #### Example:
-- BP_PPT.py -b demo/pwmBP_human.txt -p demo/scPPT_human.txt -i demo/example.fa 
+```bash
+python3 BP_PPT_updated.py \
+-b demo/pwmBP_human.txt \
+-p demo/scPPT_human.txt \
+-i demo/example.fa \
+-o demo/example_output.txt
+```
 
 #### Format of the output file:
 - `id:      ID of the intron`
